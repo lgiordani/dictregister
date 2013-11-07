@@ -79,4 +79,78 @@ def test_remove_not_present_keyword(fixdr):
     assert fixdr[0] == {'x':1,'y':2}
     assert fixdr[1] == {'x':3,'y':4}
 
+def test_dfilter_eq(fixdr):
+    filtdr = fixdr.dfilter(x__eq=1)
+    assert len(filtdr) == 1
+    assert filtdr[0] == {'x':1,'y':2}
+
+def test_dfilter_implicit_eq(fixdr):
+    filtdr = fixdr.dfilter(x=1)
+    assert len(filtdr) == 1
+    assert filtdr[0] == {'x':1,'y':2}
+
+def test_dfilter_ne(fixdr):
+    filtdr = fixdr.dfilter(x__ne=3)
+    assert len(filtdr) == 1
+    assert filtdr[0] == {'x':1,'y':2}
+    filtdr = fixdr.dfilter(x__ne=5)
+    assert len(filtdr) == 2
+    assert filtdr[0] == fixdr[0]
+    assert filtdr[1] == fixdr[1]
+
+def test_dfilter_in(fixdrmult):
+    filtdr = fixdrmult.dfilter(x__in=1)
+    assert len(filtdr) == 1
+    assert filtdr[0] == {'x':set([1,3]),'y':2}
+    filtdr = fixdrmult.dfilter(x__in=3)
+    assert len(filtdr) == 2
+    assert filtdr[0] == fixdrmult[0]
+    assert filtdr[1] == fixdrmult[1]
+
+def test_dfilter_nin(fixdrmult):
+    filtdr = fixdrmult.dfilter(x__nin=3)
+    assert len(filtdr) == 0
+    filtdr = fixdrmult.dfilter(x__nin=1)
+    assert len(filtdr) == 1
+    assert filtdr[0] == {'x':3, 'y':4}
+
+def test_dfilter_iskey(fixdr):
+    filtdr = fixdr.dfilter(x__iskey=True)
+    assert len(filtdr) == 2
+    assert filtdr[0] == fixdr[0]
+    assert filtdr[1] == fixdr[1]
+
+def test_chain_filter(fixdr):
+    filtdr = fixdr.dfilter(x__eq=1).dfilter(y__eq=2)
+    assert len(filtdr) == 1
+    assert filtdr[0] == fixdr[0]
+
+def test_multiple_filter(fixdr):
+    filtdr = fixdr.dfilter(x__eq=1, y__eq=2)
+    assert len(filtdr) == 1
+    assert filtdr[0] == fixdr[0]
+
+def test_dget_eq(fixdr):
+    elem = fixdr.dget(x__eq=1)
+    assert elem == {'x':1,'y':2}
+    with pytest.raises(IndexError):
+        elem == fixdr.dget(x__eq=7)
+
+def test_dpop_eq(fixdr):
+    elem = fixdr.dpop(x__eq=1)
+    assert elem == {'x':1,'y':2}
+    assert len(fixdr) == 1
+    assert fixdr[0] == {'x':3, 'y':4}
+    with pytest.raises(IndexError):
+        elem == fixdr.dpop(x__eq=7)
+    
+def test_dremove_iskey(fixdr):
+    filtdr = fixdr.dremove(x__iskey=True)
+    assert len(filtdr) == 2
+    assert len(fixdr) == 0
+
+def test_dremove_copy_iskey(fixdr):
+    filtdr = fixdr.dremove_copy(x__iskey=True)
+    assert len(filtdr) == 0
+    assert len(fixdr) == 2
 

@@ -14,9 +14,7 @@ class DictRegister(list):
 
     def _check_elem(self, elem):
         # Check if the given element is a dictionary-like object
-        try:
-            elem.iteritems
-        except AttributeError:
+        if not isinstance(elem, collections.Mapping):
             raise ValueError, "Given element %s is not a dictionary-like object" %(elem)
 
     def append(self, elem):
@@ -77,7 +75,6 @@ class DictRegister(list):
                     if item[key] == value:
                         item.pop(key)
 
-
     def _match(self, item, keyop, value):
         # Split key and operator
         if '__' not in keyop:
@@ -116,7 +113,10 @@ class DictRegister(list):
             return False
 
     def dfilter(self, **kwds):
-        starting_list = self._list
+        """Returns a DictRegister which contains only the
+        elements that match the given specifications.
+        """
+        starting_list = self[:]
         filtered_list = []
         for key, value in kwds.iteritems():
             for item in starting_list:
@@ -128,18 +128,35 @@ class DictRegister(list):
         return DictRegister(starting_list)
 
     def dget(self, **kwds):
+        """Returns the first element that matches the
+        given specification. If no elements are found
+        raises IndexError.
+        """
         return self.dfilter(**kwds)[0]
         
     def dpop(self, **kwds):
-        filtered_dr = self.dfilter(**kwds)
-        item = filtered_dr[0]
+        """Pops and returns the first element that matches the
+        given specification. If no elements are found
+        raises IndexError.
+        """
+        item = self.dget(**kwds)
         self.remove(item)
         return item
 
     def dremove(self, **kwds):
+        """Removes from the object any element that matches the
+        given specification.
+        """
         filtered_dr = self.dfilter(**kwds)
-        for item in self._list:
-            if item in filtered_dr:
-                self.remove(item)
+        for item in filtered_dr:
+            self.remove(item)
         return filtered_dr
+
+    def dremove_copy(self, **kwds):
+        """Returns a copy of the object without any element that
+        matches the given specification.
+        """
+        copy_dr = DictRegister(self)
+        copy_dr.dremove(**kwds)
+        return copy_dr
 
