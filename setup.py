@@ -44,7 +44,6 @@ setup(
     package_dir={'dictregister': 'dictregister'},
     include_package_data=True,
     install_requires=[
-        'six',
     ],
     license="BSD",
     zip_safe=False,
