@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import collections
+import six
 
 class DictRegister(list):
     def __init__(self, iterable=[]):
@@ -15,7 +16,8 @@ class DictRegister(list):
     def _check_elem(self, elem):
         # Check if the given element is a dictionary-like object
         if not isinstance(elem, collections.Mapping):
-            raise ValueError, "Given element %s is not a dictionary-like object" %(elem)
+            raise ValueError(
+                "Given element %s is not a dictionary-like object" % (elem))
 
     def append(self, elem):
         self._check_elem(elem)
@@ -118,13 +120,12 @@ class DictRegister(list):
         """
         starting_list = self[:]
         filtered_list = []
-        for key, value in kwds.iteritems():
+        for key, value in six.iteritems(kwds):
             for item in starting_list:
                 if self._match(item, key, value):
                     filtered_list.append(item)
             starting_list = filtered_list
             filtered_list = []
-        
         return DictRegister(starting_list)
 
     def dget(self, **kwds):
@@ -133,7 +134,7 @@ class DictRegister(list):
         raises IndexError.
         """
         return self.dfilter(**kwds)[0]
-        
+
     def dpop(self, **kwds):
         """Pops and returns the first element that matches the
         given specification. If no elements are found
@@ -159,4 +160,3 @@ class DictRegister(list):
         copy_dr = DictRegister(self)
         copy_dr.dremove(**kwds)
         return copy_dr
-
