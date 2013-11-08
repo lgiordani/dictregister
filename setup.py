@@ -32,7 +32,7 @@ class PyTest(TestCommand):
 
 setup(
     name='dictregister',
-    version='0.9.0',
+    version='0.9.0.post1',
     description='A searchable list of dictionaries',
     long_description=readme + '\n\n' + history,
     author='Leonardo Giordani',
@@ -49,7 +49,7 @@ setup(
     zip_safe=False,
     keywords='dictregister',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
