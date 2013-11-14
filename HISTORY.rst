@@ -18,3 +18,7 @@ History
 
 * Added a direct import of DictRegister in __init__.py (thanks to https://github.com/Jeff17Robbins)
 
+0.9.2 (2013-11-14)
+++++++++++++++++++
+
+* Fixed import in __init__.py for Python 3, now all tox tests pass
