@@ -10,7 +10,7 @@ Tests for `dictregister` module.
 
 import pytest
 
-from dictregister import dictregister as dr
+import dictregister as dr
 
 
 @pytest.fixture
