@@ -13,3 +13,8 @@ History
 
 * Fixed PyPI classifiers
 
+0.9.1 (2013-11-14)
+++++++++++++++++++
+
+* Added a direct import of DictRegister in __init__.py (thanks to https://github.com/Jeff17Robbins)
+

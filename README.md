@@ -47,7 +47,7 @@ dr = dictregister.DictRegister()
 dr.append({'x':1, 'y':2})
 ```
 
-`DictRegister` accepts only objects that inherit fromt the `collections.Mapping` Abstract Base Class. If you try to insert an object that does not stick with this rule you will receive a `ValueError`.
+`DictRegister` accepts only objects that inherit from the `collections.Mapping` Abstract Base Class. If you try to insert an object that does not stick with this rule you will receive a `ValueError`.
 
 Managing keys
 -------------

@@ -32,7 +32,7 @@ class PyTest(TestCommand):
 
 setup(
     name='dictregister',
-    version='0.9.0.post1',
+    version='0.9.1',
     description='A searchable list of dictionaries',
     long_description=readme + '\n\n' + history,
     author='Leonardo Giordani',

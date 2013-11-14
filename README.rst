@@ -61,7 +61,7 @@ and you can use any method of ``list`` like ``append()``
     dr = dictregister.DictRegister()
     dr.append({'x':1, 'y':2})
 
-``DictRegister`` accepts only objects that inherit fromt the
+``DictRegister`` accepts only objects that inherit from the
 ``collections.Mapping`` Abstract Base Class. If you try to insert an
 object that does not stick with this rule you will receive a
 ``ValueError``.
