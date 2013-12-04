@@ -22,3 +22,8 @@ History
 ++++++++++++++++++
 
 * Fixed import in __init__.py for Python 3, now all tox tests pass
+
+1.0.0 (2013-12-04)
+++++++++++++++++++
+
+* Raise TypeError instead of ValueError if invalid object is passed (pull request from joshgeller)
