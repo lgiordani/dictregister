@@ -64,7 +64,7 @@ and you can use any method of ``list`` like ``append()``
 ``DictRegister`` accepts only objects that inherit from the
 ``collections.Mapping`` Abstract Base Class. If you try to insert an
 object that does not stick with this rule you will receive a
-``ValueError``.
+``TypeError``.
 
 Managing keys
 -------------

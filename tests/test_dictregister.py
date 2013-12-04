@@ -36,7 +36,7 @@ def test_can_be_indexed(fixdr):
 
 
 def test_instance_with_an_argument():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         dr.DictRegister([1, 2, 3])
 
 
@@ -46,7 +46,7 @@ def test_append_dict(fixdr):
 
 
 def test_cannot_append_non_dict(fixdr):
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         fixdr.append(6)
 
 

@@ -16,7 +16,7 @@ class DictRegister(list):
     def _check_elem(self, elem):
         # Check if the given element is a dictionary-like object
         if not isinstance(elem, collections.Mapping):
-            raise ValueError(
+            raise TypeError(
                 "Given element %s is not a dictionary-like object" % (elem))
 
     def append(self, elem):
